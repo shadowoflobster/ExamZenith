@@ -1,0 +1,15 @@
+server:
+  port: 8000
+
+spring:
+  datasource:
+    url: ${EXAM_ZENITH_DB_URL}
+    username: ${EXAM_ZENITH_DB_USER}
+    password: ${EXAM_ZENITH_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: db/changelog/db.changelog-master.yaml
+    default-schema: exam_zenith
+
+jwt:
+  secret-key: ${EXAM_ZENITH_KEY}

@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/scripts/01-CREATE-ROLES-AND-USERS-TABLES.sql
+  - include:
+      file: db/changelog/scripts/02-CREATE-COURSES-AND-QUESTIONS-TABLES.sql
+  - include:
+      file: db/changelog/scripts/03-CREATE-ANSWER_FORMS-AND-ANSWERS.sql
+  - include:
+      file: db/changelog/scripts/04-CREATE-TEACHER-COURSE-AND-STUDENT-COURSE-RELATIONSHIP.sql
+  - include:
+      file: db/changelog/scripts/05-ADD-TITLE-COLUMN-TO-QUESTION-FORMS.sql
+  - include:
+      file: db/changelog/scripts/06-INSERT-ROLES.sql
+  - include:
+      file: db/changelog/scripts/07-ADD-SEQUENCES.sql
+  - include:
+      file: db/changelog/scripts/08-ADD-QUESTION_OPTIONS_SEQUENCE.sql
+
