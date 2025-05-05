@@ -1,6 +1,8 @@
 package com.ExamZenith.ExamZenith.courses.service;
 
 
+import com.ExamZenith.ExamZenith.courses.model.Question.QuestionDTO;
+import com.ExamZenith.ExamZenith.courses.model.QuestionForm.QuestionFormDTO;
 import com.ExamZenith.ExamZenith.courses.model.QuestionForm.QuestionFormRequest;
 import com.ExamZenith.ExamZenith.courses.model.QuestionType;
 import com.ExamZenith.ExamZenith.courses.persistence.AnswerOption.AnswerOption;
@@ -12,12 +14,14 @@ import com.ExamZenith.ExamZenith.courses.persistence.QuestionForm.QuestionForm;
 import com.ExamZenith.ExamZenith.courses.persistence.QuestionForm.QuestionFormRepository;
 import com.ExamZenith.ExamZenith.errors.NotFoundException;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class QuestionFormService {
@@ -25,6 +29,22 @@ public class QuestionFormService {
     private final CourseRepository courseRepository;
     private final AnswerOptionRepository answerOptionRepository;
     private final QuestionRepository questionRepository;
+    private final QuestionService questionService;
+
+
+    public QuestionFormDTO mapQuestionForm(QuestionForm questionForm){
+        Set<QuestionDTO> questionDTOSet = questionForm.getQuestions()
+                .stream()
+                .map(questionService::mapQuestion)
+                .collect(Collectors.toSet());
+
+        return new QuestionFormDTO(
+                questionForm.getId(),
+                questionForm.getCourse().getId(),
+                questionForm.getTitle(),
+                questionDTOSet
+        );
+    }
 
     @Transactional
     public void createQuestionForm(QuestionFormRequest request){
