@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,7 +34,7 @@ public class QuestionService {
                 question.getQuestion_type(),
                 answerOptionDTOS
         );
-    };
+    }
 
     public QuestionDTO getQuestion(Long id){
         Question question = questionRepository.findById(id)

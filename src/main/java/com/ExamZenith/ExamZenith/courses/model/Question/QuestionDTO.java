@@ -14,6 +14,6 @@ public class QuestionDTO {
     private Long id;
     private Long question_form_id;
     private String question_text;
-    private QuestionType question_type;;
-    private Set<AnswerOptionDTO> answerOptionDTOSet = new HashSet<>();
+    private QuestionType question_type;
+    private Set<AnswerOptionDTO> answerOptionDTOSet;
 }

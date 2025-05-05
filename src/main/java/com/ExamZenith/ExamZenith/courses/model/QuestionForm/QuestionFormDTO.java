@@ -13,7 +13,7 @@ public class QuestionFormDTO {
     private Long id;
     private Long course_id;
     private String title;
-    private Set<QuestionDTO> questionDTOSet = new HashSet<>();
+    private Set<QuestionDTO> questionDTOSet;
 
 
 }
