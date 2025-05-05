@@ -2,7 +2,6 @@ package com.ExamZenith.ExamZenith.courses.controller;
 
 
 import com.ExamZenith.ExamZenith.courses.model.Course.CourseDTO;
-import com.ExamZenith.ExamZenith.courses.persistence.Course.Course;
 import com.ExamZenith.ExamZenith.courses.service.CourseService;
 import com.ExamZenith.ExamZenith.courses.model.Course.CourseRequest;
 import lombok.AllArgsConstructor;
