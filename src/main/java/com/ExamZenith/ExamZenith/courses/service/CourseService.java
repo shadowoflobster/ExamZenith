@@ -6,6 +6,7 @@ import com.ExamZenith.ExamZenith.courses.model.QuestionForm.QuestionFormDTO;
 import com.ExamZenith.ExamZenith.courses.persistence.Course.Course;
 import com.ExamZenith.ExamZenith.courses.persistence.Course.CourseRepository;
 import com.ExamZenith.ExamZenith.errors.NotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,9 +42,7 @@ public class CourseService {
     public CourseDTO getCourse(Long id){
         Course course = courseRepository.findById(id)
                 .orElseThrow(() ->  new NotFoundException("Course not found with id: "+ id));
-        if (course != null)
-            return mapCourse(course);
-        return null;
+        return mapCourse(course);
     }
 
     public void createCourse(CourseRequest request){
@@ -52,10 +51,25 @@ public class CourseService {
         courseRepository.save(course);
     }
 
-    public void deleteCourse(Long id){
+    public boolean deleteCourse(Long id){
+        if(courseRepository.existsById(id)){
+            courseRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Transactional
+    public boolean updateCourse(Long id, CourseRequest request){
         Course course = courseRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("No course found with id: "+id));
-        courseRepository.deleteById(id);
+                .orElseThrow(() ->  new NotFoundException("Course not found with id: "+ id));
+        if(course!=null){
+            course.setName(request.getName());
+            courseRepository.save(course);
+        return true;
+        }
+        return false;
+
     }
 
 }

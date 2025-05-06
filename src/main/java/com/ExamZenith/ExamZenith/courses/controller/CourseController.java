@@ -21,18 +21,31 @@ public class CourseController {
         return ResponseEntity.ok(courseDTO);
     }
 
+    @GetMapping
+    public Page<CourseDTO> getCourses(@RequestParam int page, @RequestParam int pageSize){
+        return service.getCourses(page,pageSize);
+    }
+
+
     @PostMapping
     public void createCourse(@RequestBody CourseRequest request){
         service.createCourse(request);
     }
 
     @DeleteMapping("/{course_id}")
-    public void deleteCourse(@PathVariable Long course_id){
-        service.deleteCourse(course_id);
+    public ResponseEntity<String> deleteCourse(@PathVariable Long course_id){
+        if(!service.deleteCourse(course_id)){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok("Course Deleted Successfully!");
     }
 
-    @GetMapping
-    public Page<CourseDTO> getCourses(@RequestParam int page, @RequestParam int pageSize){
-        return service.getCourses(page,pageSize);
+
+    @PutMapping("/{course_id}")
+    public ResponseEntity<String> updateCourse(@PathVariable Long course_id,@RequestBody CourseRequest request){
+        if(!service.updateCourse(course_id,request)){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok("Course Updated Successfully!");
     }
 }
