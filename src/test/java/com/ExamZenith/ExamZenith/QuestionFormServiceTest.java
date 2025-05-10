@@ -80,5 +80,49 @@ public class QuestionFormServiceTest {
     }
 
 
+    @Test
+    void mapQuestionForms(){
+        //Given
+        Long questionFormId = 101L;
+        QuestionForm questionForm = new QuestionForm();
+        questionForm.setId(101L);
+        questionForm.setTitle("OOP principles");
+
+        Course course = new Course();
+        course.setId(1L);
+        questionForm.setCourse(course);
+
+        Question question1 = new Question();
+        question1.setId(201L);
+
+        Question question2 = new Question();
+        question2.setId(202L);
+
+        Set<Question> questions = Set.of(question1,question2);
+        questionForm.setQuestions(questions);
+
+        QuestionDTO question1DTO = new QuestionDTO();
+        question1DTO.setId(201L);
+
+        QuestionDTO question2DTO = new QuestionDTO();
+        question2DTO.setId(202L);
+
+        when(questionService.mapQuestion(question1)).thenReturn(question1DTO);
+        when(questionService.mapQuestion(question2)).thenReturn(question2DTO);
+
+        //When
+        QuestionFormDTO questionFormDTO = questionFormService.mapQuestionForm(questionForm);
+
+        //Then
+        Assertions.assertEquals(101L,questionFormDTO.getId());
+        Assertions.assertEquals("OOP principles",questionFormDTO.getTitle());
+        Assertions.assertEquals(1L,questionFormDTO.getCourse_id());
+        Assertions.assertTrue(questionFormDTO.getQuestionDTOSet().stream().anyMatch(dto -> dto.getId()==201L));
+        Assertions.assertTrue(questionFormDTO.getQuestionDTOSet().stream().anyMatch(dto -> dto.getId()==202L));
+
+
+    }
+
+
 
 }
