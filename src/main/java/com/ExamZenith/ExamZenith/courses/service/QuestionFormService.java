@@ -46,6 +46,13 @@ public class QuestionFormService {
         );
     }
 
+    public QuestionFormDTO getQuestionFormById(Long id){
+        QuestionForm questionForm = questionFormRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("No QuestionForm Found With Id: "+id));
+        return mapQuestionForm(questionForm);
+    }
+
+
     @Transactional
     public void createQuestionForm(QuestionFormRequest request){
         QuestionForm questionForm = new QuestionForm();

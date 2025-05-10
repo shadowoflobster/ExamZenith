@@ -35,7 +35,7 @@ public class SecurityConfig {
                                 "/auth/login",
                                 "/users/**",
                                 "/course/**",
-                                "/question-form",
+                                "/question-form/**",
                                 "/answer-option",
                                 "/question/**"
                         ).permitAll()

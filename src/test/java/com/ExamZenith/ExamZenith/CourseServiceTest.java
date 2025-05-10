@@ -22,7 +22,6 @@ import org.springframework.data.domain.PageRequest;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -73,7 +72,7 @@ public class CourseServiceTest {
     }
 
     @Test
-    void mapCourse_shouldReturnCorrectCourseDTO(){
+    void mapCourse_shouldReturnCorrectCourseDTO()  {
         //Given
         Course course = new Course();
         course.setId(1L);

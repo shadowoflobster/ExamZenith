@@ -4,12 +4,14 @@ import com.ExamZenith.ExamZenith.courses.model.AnswerOption.AnswerOptionDTO;
 import com.ExamZenith.ExamZenith.courses.model.QuestionType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class QuestionDTO {
     private Long id;
     private Long question_form_id;
