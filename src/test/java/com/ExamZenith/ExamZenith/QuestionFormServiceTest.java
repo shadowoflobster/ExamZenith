@@ -3,26 +3,29 @@ package com.ExamZenith.ExamZenith;
 
 import com.ExamZenith.ExamZenith.courses.model.Question.QuestionDTO;
 import com.ExamZenith.ExamZenith.courses.model.QuestionForm.QuestionFormDTO;
+import com.ExamZenith.ExamZenith.courses.model.QuestionForm.QuestionFormRequest;
+import com.ExamZenith.ExamZenith.courses.persistence.AnswerOption.AnswerOptionRepository;
 import com.ExamZenith.ExamZenith.courses.persistence.Course.Course;
+import com.ExamZenith.ExamZenith.courses.persistence.Course.CourseRepository;
 import com.ExamZenith.ExamZenith.courses.persistence.Question.Question;
 import com.ExamZenith.ExamZenith.courses.persistence.Question.QuestionRepository;
 import com.ExamZenith.ExamZenith.courses.persistence.QuestionForm.QuestionForm;
 import com.ExamZenith.ExamZenith.courses.persistence.QuestionForm.QuestionFormRepository;
 import com.ExamZenith.ExamZenith.courses.service.QuestionFormService;
 import com.ExamZenith.ExamZenith.courses.service.QuestionService;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.util.Assert;
 
-import java.util.HashSet;
+
 import java.util.Optional;
 import java.util.Set;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,6 +35,15 @@ public class QuestionFormServiceTest {
 
     @Mock
     private QuestionService questionService;
+
+    @Mock
+    private CourseRepository courseRepository;
+
+    @Mock
+    private QuestionRepository questionRepository;
+
+    @Mock
+    private AnswerOptionRepository answerOptionRepository;
 
     @InjectMocks
     private QuestionFormService questionFormService;
@@ -119,9 +131,28 @@ public class QuestionFormServiceTest {
         Assertions.assertEquals(1L,questionFormDTO.getCourse_id());
         Assertions.assertTrue(questionFormDTO.getQuestionDTOSet().stream().anyMatch(dto -> dto.getId()==201L));
         Assertions.assertTrue(questionFormDTO.getQuestionDTOSet().stream().anyMatch(dto -> dto.getId()==202L));
-
-
     }
+
+    @Test
+    void createQuestionForm_ShouldCreateCourseFromRequest(){
+        //Given
+        QuestionFormRequest request = new QuestionFormRequest();
+        Course course = new Course();
+
+        course.setId(1L);
+        course.setName("OOP");
+
+        request.setCourse_id(course.getId());
+        request.setTitle("OOP principles");
+
+        when(courseRepository.findById(request.getCourse_id())).thenReturn(Optional.of(course));
+
+        //When
+        questionFormService.createQuestionForm(request);
+
+        //Then
+        verify(questionFormRepository).save(any(QuestionForm.class));
+        }
 
 
 

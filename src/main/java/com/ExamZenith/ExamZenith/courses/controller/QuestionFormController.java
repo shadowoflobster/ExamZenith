@@ -21,8 +21,9 @@ public class QuestionFormController {
 
 
     @PostMapping
-    public void createQuestionForm(@RequestBody QuestionFormRequest request){
+    public ResponseEntity<String> createQuestionForm(@RequestBody QuestionFormRequest request){
         service.createQuestionForm(request);
+        return ResponseEntity.ok("Course created successfully");
     }
 
     @DeleteMapping("/{questionForm_id}")
