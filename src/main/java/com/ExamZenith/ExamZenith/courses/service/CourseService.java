@@ -39,9 +39,9 @@ public class CourseService {
 );
     }
 
-    public CourseDTO getCourse(Long id){
+    public CourseDTO getCourse(Long id) {
         Course course = courseRepository.findById(id)
-                .orElseThrow(() ->  new NotFoundException("Course not found with id: "+ id));
+                .orElseThrow(() -> buildNotFoundException(id));
         return mapCourse(course);
     }
 
@@ -62,7 +62,7 @@ public class CourseService {
     @Transactional
     public boolean updateCourse(Long id, CourseRequest request){
         Course course = courseRepository.findById(id)
-                .orElseThrow(() ->  new NotFoundException("Course not found with id: "+ id));
+                .orElseThrow(() ->  buildNotFoundException(id));
         if(course!=null){
             course.setName(request.getName());
             courseRepository.save(course);
@@ -70,6 +70,10 @@ public class CourseService {
         }
         return false;
 
+    }
+
+    private NotFoundException buildNotFoundException(Long id){
+        return new NotFoundException("Course with id "+id+" not found");
     }
 
 }

@@ -18,7 +18,10 @@ public class CourseController {
     @GetMapping("/{courseId}")
     public ResponseEntity<CourseDTO> getCourse(@PathVariable Long courseId){
         CourseDTO courseDTO = service.getCourse(courseId);
-        return ResponseEntity.ok(courseDTO);
+        if(courseDTO!=null) {
+            return ResponseEntity.ok(courseDTO);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping
