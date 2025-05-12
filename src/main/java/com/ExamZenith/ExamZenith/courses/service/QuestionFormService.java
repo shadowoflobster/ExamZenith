@@ -4,7 +4,6 @@ package com.ExamZenith.ExamZenith.courses.service;
 import com.ExamZenith.ExamZenith.courses.model.Question.QuestionDTO;
 import com.ExamZenith.ExamZenith.courses.model.QuestionForm.QuestionFormDTO;
 import com.ExamZenith.ExamZenith.courses.model.QuestionForm.QuestionFormRequest;
-import com.ExamZenith.ExamZenith.courses.persistence.AnswerOption.AnswerOptionRepository;
 import com.ExamZenith.ExamZenith.courses.persistence.Course.CourseRepository;
 import com.ExamZenith.ExamZenith.courses.persistence.Question.QuestionRepository;
 import com.ExamZenith.ExamZenith.courses.persistence.QuestionForm.QuestionForm;
@@ -62,6 +61,6 @@ public class QuestionFormService {
     public void deleteQuestionForm(Long questionFormId){
         QuestionForm questionForm = questionFormRepository.findById(questionFormId)
                 .orElseThrow(() -> new NotFoundException("Question Form Not Found With Id: "+questionFormId));
-        questionRepository.deleteById(questionFormId);
+        questionFormRepository.deleteById(questionFormId);
     }
 }

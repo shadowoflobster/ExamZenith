@@ -134,7 +134,7 @@ public class QuestionFormServiceTest {
     }
 
     @Test
-    void createQuestionForm_ShouldCreateCourseFromRequest(){
+    void createQuestionForm_ShouldCreateQuestionFormFromRequest(){
         //Given
         QuestionFormRequest request = new QuestionFormRequest();
         Course course = new Course();
@@ -154,6 +154,24 @@ public class QuestionFormServiceTest {
         verify(questionFormRepository).save(any(QuestionForm.class));
         }
 
+
+    @Test
+    void deleteQuestionForm_shouldDeleteQuestionForm(){
+        //Given
+        Long formId = 1L;
+        QuestionForm form = new QuestionForm();
+        form.setId(formId);
+        form.setTitle("OOP principles");
+
+
+        when(questionFormRepository.findById(formId)).thenReturn(Optional.of(form));
+
+        //When
+        questionFormService.deleteQuestionForm(formId);
+
+        //Then
+        verify(questionFormRepository).deleteById(formId);
+    }
 
 
 }
