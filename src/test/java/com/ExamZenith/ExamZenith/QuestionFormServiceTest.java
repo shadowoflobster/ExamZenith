@@ -39,12 +39,6 @@ public class QuestionFormServiceTest {
     @Mock
     private CourseRepository courseRepository;
 
-    @Mock
-    private QuestionRepository questionRepository;
-
-    @Mock
-    private AnswerOptionRepository answerOptionRepository;
-
     @InjectMocks
     private QuestionFormService questionFormService;
 
