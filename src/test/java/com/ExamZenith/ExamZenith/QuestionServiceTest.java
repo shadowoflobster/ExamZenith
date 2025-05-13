@@ -147,6 +147,7 @@ public class QuestionServiceTest {
 
     @Test
     void createQuestion_shouldCreateQuestion(){
+        //Given
         QuestionRequest request = new QuestionRequest();
         String questionText = "What are four basic OOP principles?";
         QuestionType questionType = QuestionType.RADIO;
@@ -165,5 +166,24 @@ public class QuestionServiceTest {
         //Then
         verify(questionRepository).save(any(Question.class));
     }
+
+    @Test
+    void deleteQuestion_shouldDeleteQuestion(){
+        //Given
+        Question question = new Question();
+        Long id = 1L;
+        question.setId(id);
+        question.setQuestion_text("What are four basic OOP principles");
+
+        when(questionRepository.findById(id)).thenReturn(Optional.of(question));
+
+        //When
+        questionService.deleteQuestion(id);
+
+        //Then
+        verify(questionRepository).deleteById(id);
+    }
+
+
 
 }
