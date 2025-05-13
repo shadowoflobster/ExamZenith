@@ -3,11 +3,13 @@ package com.ExamZenith.ExamZenith;
 
 import com.ExamZenith.ExamZenith.courses.model.AnswerOption.AnswerOptionDTO;
 import com.ExamZenith.ExamZenith.courses.model.Question.QuestionDTO;
+import com.ExamZenith.ExamZenith.courses.model.Question.QuestionRequest;
 import com.ExamZenith.ExamZenith.courses.model.QuestionType;
 import com.ExamZenith.ExamZenith.courses.persistence.AnswerOption.AnswerOption;
 import com.ExamZenith.ExamZenith.courses.persistence.Question.Question;
 import com.ExamZenith.ExamZenith.courses.persistence.Question.QuestionRepository;
 import com.ExamZenith.ExamZenith.courses.persistence.QuestionForm.QuestionForm;
+import com.ExamZenith.ExamZenith.courses.persistence.QuestionForm.QuestionFormRepository;
 import com.ExamZenith.ExamZenith.courses.service.AnswerOptionService;
 import com.ExamZenith.ExamZenith.courses.service.QuestionService;
 import org.junit.jupiter.api.Assertions;
@@ -20,6 +22,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 import java.util.Set;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,6 +33,9 @@ public class QuestionServiceTest {
 
     @Mock
     AnswerOptionService answerOptionService;
+
+    @Mock
+    QuestionFormRepository questionFormRepository;
 
     @InjectMocks
     QuestionService questionService;
@@ -136,6 +143,27 @@ public class QuestionServiceTest {
         Assertions.assertTrue(questionDTO.getAnswerOptionDTOSet().stream().anyMatch(dto -> dto.getId()==101L));
         Assertions.assertTrue(questionDTO.getAnswerOptionDTOSet().stream().anyMatch(dto -> dto.getId()==102L));
 
+    }
+
+    @Test
+    void createQuestion_shouldCreateQuestion(){
+        QuestionRequest request = new QuestionRequest();
+        String questionText = "What are four basic OOP principles?";
+        QuestionType questionType = QuestionType.RADIO;
+        Long formId = 101L;
+        request.setQuestion_text(questionText);
+        request.setQuestion_type(questionType);
+        request.setQuestion_form_id(formId);
+
+        QuestionForm form = new QuestionForm();
+        form.setId(formId);
+
+        when(questionFormRepository.findById(request.getQuestion_form_id())).thenReturn(Optional.of(form));
+        //when
+        questionService.createQuestion(request);
+
+        //Then
+        verify(questionRepository).save(any(Question.class));
     }
 
 }
