@@ -26,6 +26,15 @@ public class AnswerOptionService {
         );
     }
 
+    public AnswerOptionDTO getAnswerOptionById(Long optionId) {
+        AnswerOption answerOption = answerOptionRepository.findById(optionId)
+                .orElseThrow(() -> buildNotFoundException(optionId));
+        if (answerOption != null) {
+            return mapAnswerOption(answerOption);
+        }
+        return null;
+    }
+
     public void createAnswerOption(AnswerOptionRequest request){
         AnswerOption answerOption = new AnswerOption();
         Question question = questionRepository.findById(request.getQuestion_id())
@@ -42,5 +51,9 @@ public class AnswerOptionService {
                 .orElseThrow(() -> new NotFoundException("Not Answer Option found with id:"+id));
 
         answerOptionRepository.deleteById(id);
+    }
+
+    private NotFoundException buildNotFoundException(Long id){
+        return new NotFoundException("Answer Option with id "+id+" not found");
     }
 }
