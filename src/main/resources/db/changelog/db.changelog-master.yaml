@@ -15,4 +15,5 @@ databaseChangeLog:
       file: db/changelog/scripts/07-ADD-SEQUENCES.sql
   - include:
       file: db/changelog/scripts/08-ADD-QUESTION_OPTIONS_SEQUENCE.sql
-
+  - include:
+      file: db/changelog/scripts/09-CREATE-USER_QUESTION_ANSWERS.sql
