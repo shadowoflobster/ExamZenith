@@ -4,7 +4,9 @@ import com.ExamZenith.ExamZenith.courses.persistence.AnswerOption.AnswerOption;
 import com.ExamZenith.ExamZenith.courses.persistence.Question.Question;
 import com.ExamZenith.ExamZenith.users.persistence.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -13,6 +15,8 @@ import java.time.LocalDateTime;
 @Table(name = "user_question_answers")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserQuestionAnswers {
     @EmbeddedId
     private UserQuestionAnswersKey id;
