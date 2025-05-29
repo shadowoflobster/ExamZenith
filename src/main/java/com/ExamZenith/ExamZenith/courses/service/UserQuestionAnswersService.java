@@ -69,6 +69,14 @@ public class UserQuestionAnswersService {
 
     }
 
+    @Transactional
+    public void deleteUserQuestionAnswersService(Long studentId, Long questionId){
+        UserQuestionAnswersKey key = new UserQuestionAnswersKey(studentId, questionId);
+        UserQuestionAnswers entity = repository.findById(key)
+                .orElseThrow(() -> new NotFoundException("No User Answer found with user id:" + studentId + " on question Id " + questionId));
+        repository.delete(entity);
+    }
+
 
 
 }
