@@ -49,6 +49,7 @@ public class UserQuestionAnswersService {
     public void createUserQuestionAnswersService(UserQuestionAnswersRequest request){
         UserQuestionAnswersKey key = new UserQuestionAnswersKey(request.getStudentId(), request.getQuestionId());
         UserQuestionAnswers entity = new UserQuestionAnswers();
+        entity.setId(key);
         entity.setStudent(userRepository.findById(request.getStudentId())
                 .orElseThrow(() -> new NotFoundException("User not found with id: " + request.getStudentId())));
         entity.setQuestion(questionRepository.findById(request.getQuestionId())

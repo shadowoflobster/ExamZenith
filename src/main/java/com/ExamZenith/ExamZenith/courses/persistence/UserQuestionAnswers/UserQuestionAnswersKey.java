@@ -3,7 +3,9 @@ package com.ExamZenith.ExamZenith.courses.persistence.UserQuestionAnswers;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,6 +14,8 @@ import java.util.Objects;
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class UserQuestionAnswersKey implements Serializable {
     @Column(name = "student_id")
     private Long studentId;

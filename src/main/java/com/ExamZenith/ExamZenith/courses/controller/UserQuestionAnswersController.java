@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserQuestionAnswersController {
     private UserQuestionAnswersService service;
 
-    @GetMapping("/{userId},{questionId}")
+    @GetMapping("/{userId}/{questionId}")
     public ResponseEntity<UserQuestionAnswersDTO> getUserAnswer(@PathVariable Long userId,@PathVariable Long questionId){
         UserQuestionAnswersDTO data =  service.findByKey(userId, questionId);
         return ResponseEntity.ok(data);
