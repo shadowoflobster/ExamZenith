@@ -1,6 +1,5 @@
 package com.ExamZenith.ExamZenith.courses.service;
 
-import com.ExamZenith.ExamZenith.courses.model.AnswerOption.AnswerOptionDTO;
 import com.ExamZenith.ExamZenith.courses.model.UserQuestionAnswers.UserQuestionAnswersDTO;
 import com.ExamZenith.ExamZenith.courses.model.UserQuestionAnswers.UserQuestionAnswersRequest;
 import com.ExamZenith.ExamZenith.courses.persistence.AnswerOption.AnswerOption;
