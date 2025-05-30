@@ -1,7 +1,6 @@
 package com.ExamZenith.ExamZenith.courses.persistence.ValidAnswers;
 
 
-import com.ExamZenith.ExamZenith.courses.persistence.UserQuestionAnswers.UserQuestionAnswersKey;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
