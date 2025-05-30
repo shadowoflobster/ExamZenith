@@ -1,6 +1,8 @@
 package com.ExamZenith.ExamZenith.courses.persistence.ValidAnswers;
 
 
+import com.ExamZenith.ExamZenith.courses.persistence.AnswerOption.AnswerOption;
+import com.ExamZenith.ExamZenith.courses.persistence.Question.Question;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,14 +19,14 @@ public class ValidAnswers {
     private ValidAnswersKey id;
 
     @ManyToOne
-    @MapsId("question_id")
+    @MapsId("questionId")
     @JoinColumn(name="question_id", nullable = false)
-    private Long questionId;
+    private Question question;
 
     @ManyToOne
-    @MapsId("answer_options_id")
+    @MapsId("answerOptionsId")
     @JoinColumn(name = "answer_options_id", nullable = false)
-    private Long answerOptionsId;
+    private AnswerOption answerOption;
 
 
 }
