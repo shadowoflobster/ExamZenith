@@ -19,3 +19,5 @@ databaseChangeLog:
       file: db/changelog/scripts/09-CREATE-USER_QUESTION_ANSWERS.sql
   - include:
       file: db/changelog/scripts/10-CREATE-QUESTION-VALID-ANSWERS.sql
+  - include:
+      file: db/changelog/scripts/11-CREATE-USER-QUESTION-GRADE.sql
